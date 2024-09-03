@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${input:selectProgram}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "D:\\Microsoft VS Code\\VS Code 1.50.1\\Microsoft VS Code\\tools\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "将反汇编风格设置为 Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "selectProgram",
+            "type": "pickString",
+            "description": "Select the executable to debug",
+            "options": [
+                "${workspaceFolder}\\bin\\demo.exe",
+                "${workspaceFolder}\\bin\\dp_climp_step.exe"
+            ],
+            "default": "${workspaceFolder}\\bin\\demo.exe"
+        }
+    ]
+}
