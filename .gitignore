@@ -1,6 +1,6 @@
 .dist/
 
-./vscode/setting.json
+.vscode/settings.json
 
 build/
 

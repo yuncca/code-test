@@ -31,9 +31,16 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "mingw32-make.exe",
+            "type": "shell",
+            "command": "make", // 默认命令，适用于 Linux
             "args": [],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "windows": {
+                "command": "mingw32-make.exe" // Windows下的命令
+            },
+            "linux": {
+                "command": "make" // Linux下的命令
+            }
         },
         {
             "label": "build",

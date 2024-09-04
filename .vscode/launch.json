@@ -12,7 +12,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "D:\\Microsoft VS Code\\VS Code 1.50.1\\Microsoft VS Code\\tools\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
@@ -25,7 +25,15 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "build"
+            "preLaunchTask": "build",
+            "windows": {
+                "program": "${workspaceFolder}/bin/${input:selectProgram}.exe",
+                "miDebuggerPath": "D:\\Microsoft VS Code\\VS Code 1.50.1\\Microsoft VS Code\\tools\\mingw64\\bin\\gdb.exe"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/bin/${input:selectProgram}",
+                "miDebuggerPath": "/usr/bin/gdb"
+            }
         }
     ],
     "inputs": [
@@ -34,10 +42,10 @@
             "type": "pickString",
             "description": "Select the executable to debug",
             "options": [
-                "${workspaceFolder}\\bin\\demo.exe",
-                "${workspaceFolder}\\bin\\dp_climp_step.exe"
+                "demo",
+                "dp_climp_step"
             ],
-            "default": "${workspaceFolder}\\bin\\demo.exe"
+            "default": "demo"
         }
     ]
 }
