@@ -43,7 +43,7 @@
             "description": "Select the executable to debug",
             "options": [
                 "demo",
-                "dp_climp_step"
+                "template"
             ],
             "default": "demo"
         }

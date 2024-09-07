@@ -10,3 +10,9 @@ lib/
 
 test/
 */test/
+
+include/
+
+src/
+!src/demo/
+!src/template/
