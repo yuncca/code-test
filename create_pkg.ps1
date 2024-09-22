@@ -14,7 +14,7 @@ $source_cmake_file = Join-Path $source_cmake_dir "CMakeLists.txt"
 $source_cc_file = Join-Path $source_cmake_dir "template.cc"  
 $source_h_file = Join-Path $source_cmake_dir "template.h"
 
-$target_cmake_file = "src\CMakeLists.txt"  
+$launchFilePath = ".vscode\launch.json"
 
 if (-not (Test-Path $source_cmake_file)) {
     Write-Host "Source CMakeLists.txt file does not exist: $source_cmake_file"
@@ -58,17 +58,14 @@ if (-not (Test-Path $folder_path)) {
 Copy-Item -Path $source_cmake_file -Destination "$folder_path\CMakeLists.txt"
 Write-Host "CMakeLists.txt has been copied to the $folder_path directory"
 
-if (-not (Test-Path $target_cmake_file)) {
-    Write-Host "Target CMakeLists.txt file does not exist: $target_cmake_file"
-    exit 1
+$launchJson = Get-Content $launchFilePath | Out-String | ConvertFrom-Json
+if (-not $launchJson.inputs.options.Contains($folder_name)) {
+    $launchJson.inputs | ForEach-Object {
+        if ($_.id -eq "selectProgram") {
+            $_.options += $folder_name
+        }
+    }
+    $launchJson | ConvertTo-Json -Depth 100 | Set-Content $launchFilePath -Force
 }
 
-$add_subdirectory_line = "add_subdirectory($folder_name)"
-$target_cmake_content = Get-Content $target_cmake_file
-if ($target_cmake_content -notcontains $add_subdirectory_line) {
-    Add-Content -Path $target_cmake_file -Value "`n"
-    Add-Content -Path $target_cmake_file -Value $add_subdirectory_line
-    Write-Host "Added: add_subdirectory($folder_name) in $target_cmake_file"
-} else {
-    Write-Host "add_subdirectory($folder_name) already exists in $target_cmake_file"
-}
+Write-Host "Project '$folder_name' has been added to launch.json"

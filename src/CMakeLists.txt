@@ -1,3 +1,8 @@
-add_subdirectory(demo)
+file(GLOB SUBDIRS LIST_DIRECTORIES true *)
 
-add_subdirectory(template)
+foreach(SUBDIR ${SUBDIRS})
+    if(IS_DIRECTORY ${SUBDIR})
+        # message(STATUS "Adding subdirectory: ${SUBDIR}")
+        add_subdirectory(${SUBDIR})
+    endif()
+endforeach()

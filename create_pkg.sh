@@ -13,8 +13,6 @@ source_cmake_file="$source_cmake_dir/CMakeLists.txt"
 source_cc_file="$source_cmake_dir/template.cc"
 source_h_file="$source_cmake_dir/template.h"
 
-target_cmake_file="src/CMakeLists.txt"
-
 if [ ! -f "$source_cmake_file" ]; then
     echo "Source CMakeLists.txt file does not exist: $source_cmake_file"
     exit 1
@@ -58,17 +56,3 @@ fi
 
 cp "$source_cmake_file" "$folder_path/CMakeLists.txt"
 echo "CMakeLists.txt has been copied to the $folder_path directory"
-
-if [ ! -f "$target_cmake_file" ]; then
-    echo "Target CMakeLists.txt file does not exist: $target_cmake_file"
-    exit 1
-fi
-
-add_subdirectory_line="add_subdirectory($folder_name)"
-if ! grep -q "$add_subdirectory_line" "$target_cmake_file"; then
-    echo >> "$target_cmake_file"
-    echo "$add_subdirectory_line" >> "$target_cmake_file"
-    echo "Added: add_subdirectory($folder_name) in $target_cmake_file"
-else
-    echo "add_subdirectory($folder_name) already exists in $target_cmake_file"
-fi

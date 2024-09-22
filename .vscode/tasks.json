@@ -32,14 +32,16 @@
                 "isDefault": true
             },
             "type": "shell",
-            "command": "make", // 默认命令，适用于 Linux
-            "args": [],
+            "command": "bash",
+            "args": [
+                "-j${env:NUMBER_OF_PROCESSORS}"
+            ],
             "problemMatcher": [],
             "windows": {
-                "command": "mingw32-make.exe" // Windows下的命令
+                "command": "mingw32-make.exe"
             },
             "linux": {
-                "command": "make" // Linux下的命令
+                "command": "make"
             }
         },
         {
